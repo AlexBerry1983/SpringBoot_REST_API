@@ -22,7 +22,7 @@ import com.integration.model.h2model.JournalH2Datamodel;
 import com.integration.repository.JournalRepository;
 
 @RestController()
-@RequestMapping("/content")
+@RequestMapping("/journals")
 public class Controller {
 	
 	private final JournalRepository journalRepo;
@@ -71,7 +71,7 @@ public class Controller {
 	@ResponseBody
 	public JournalH2Datamodel updateJournal(@PathVariable String id, @RequestParam String paramType, @RequestBody JournalH2Datamodel journal) {
 		if(!paramType.equalsIgnoreCase("message")) {
-			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Param specified to update. Please supply query param as ?paramTyne= and try again");
+			throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Cannot update specified parameter. Please supply a different query param and try again");
 		} else {
 			Optional<JournalH2Datamodel> optionalJournal = this.journalRepo.findById(id);
 			if(optionalJournal.isPresent()) {
